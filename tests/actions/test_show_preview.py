@@ -12,7 +12,7 @@ call = [
 @pytest.mark.parametrize(
     "context, expected_line_1, expected_line_3, expected_line_3",
     [
-        (call[0], call[1]),
+        (call[0], call[1], call[2], call[3]),
     ],
 )
 def test_show_preview(
