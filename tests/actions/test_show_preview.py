@@ -8,8 +8,11 @@ call_one = [
 
 call_two = [
     {"all_files": ["file"], "all_dirs": []},
-    "Found 1 files and 0 directories\n\First 5 files: ['file']\n\
-First 5 directories: []\n",
+    [
+        "Found 1 files and 0 directories\n",
+        "First 5 files: ['file']\n",
+        "First 5 directories: []\n",
+    ],
 ]
 
 
@@ -23,4 +26,7 @@ First 5 directories: []\n",
 def test_show_preview(context, expected_output, capsys):
     show_preview(context)
     captured = capsys.readouterr()
-    assert captured.out == expected_output
+    assert (
+        captured.out
+        == expected_output[0] + expected_output[1] + expected_output[2]
+    )
