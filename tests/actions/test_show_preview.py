@@ -22,6 +22,28 @@ import pytest
             "First 5 files: ['file']",
             "First 5 directories: []",
         ),
+        (
+            {"all_files": [], "all_dirs": ["dir"]},
+            "Found 0 files and 1 directories",
+            "First 5 files: []",
+            "First 5 directories: ['dir']",
+        ),
+        (
+            {
+                "all_files": [
+                    "file1",
+                    "file2",
+                    "file3",
+                    "file4",
+                    "file5",
+                    "file6",
+                ],
+                "all_dirs": ["dir1", "dir2", "dir3", "dir4", "dir5", "dir6"],
+            },
+            "Found 6 files and 6 directories",
+            "First 5 files: ['file1','file2','file3','file4','file5']",
+            "First 5 directories: ['dir1','dir2','dir3','dir4','dir5']",
+        ),
     ],
 )
 def test_show_preview(context, line_one, line_two, line_three, capsys):
