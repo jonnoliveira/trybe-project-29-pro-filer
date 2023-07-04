@@ -11,10 +11,9 @@ call = [
 def test_show_preview(capsys):
     show_preview(call)
     captured = capsys.readouterr()
-    for line1, line2, line3 in captured.out.splitlines():
-        assert line1 == call[1]
-        assert line2 == call[2]
-        assert line3 == call[3]
+    assert call[1] in captured.out
+    assert call[2] in captured.out
+    assert call[3] in captured.out
 
 
 def test_show_preview_empty(capsys):
