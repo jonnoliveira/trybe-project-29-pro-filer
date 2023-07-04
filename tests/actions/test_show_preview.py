@@ -9,21 +9,13 @@ call = [
 ]
 
 
-@pytest.mark.parametrize(
-    "context, expected_line_1, expected_line_3, expected_line_3",
-    [
-        (call[0], call[1], call[2], call[3]),
-    ],
-)
-def test_show_preview(
-    context, expected_line_1, expected_line_2, expected_line_3, capsys
-):
-    show_preview(context)
+def test_show_preview(capsys):
+    show_preview(call)
     captured = capsys.readouterr()
     for line1, line2, line3 in captured.out.splitlines():
-        assert line1 == expected_line_1
-        assert line2 == expected_line_2
-        assert line3 == expected_line_3
+        assert line1 == call[1]
+        assert line2 == call[2]
+        assert line3 == call[3]
 
 
 def test_show_preview_empty(capsys):
