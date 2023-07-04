@@ -10,6 +10,11 @@ call = [
     ],
 ]
 
+call_empty = [
+    {"all_files": [], "all_dirs": []},
+    "Found 0 files and 0 directories\n",
+]
+
 
 @pytest.mark.parametrize(
     "context, expected_output",
@@ -24,12 +29,6 @@ def test_show_preview(context, expected_output, capsys):
         captured.out
         == expected_output[0] + expected_output[1] + expected_output[2]
     )
-
-
-call_empty = [
-    {"all_files": [], "all_dirs": []},
-    "Found 0 files and 0 directories\n",
-]
 
 
 def test_show_preview_empty(call_empty, capsys):
