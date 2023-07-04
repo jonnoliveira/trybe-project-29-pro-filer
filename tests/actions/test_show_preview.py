@@ -1,12 +1,7 @@
 from pro_filer.actions.main_actions import show_preview  # NOQA
 import pytest
 
-call_one = [
-    {"all_files": [], "all_dirs": []},
-    "Found 0 files and 0 directories\n",
-]
-
-call_two = [
+call = [
     {"all_files": ["file"], "all_dirs": []},
     [
         "Found 1 files and 0 directories\n",
@@ -19,8 +14,7 @@ call_two = [
 @pytest.mark.parametrize(
     "context, expected_output",
     [
-        (call_one[0], call_one[1]),
-        (call_two[0], call_two[1]),
+        (call[0], call[1]),
     ],
 )
 def test_show_preview(context, expected_output, capsys):
@@ -30,3 +24,15 @@ def test_show_preview(context, expected_output, capsys):
         captured.out
         == expected_output[0] + expected_output[1] + expected_output[2]
     )
+
+
+call_empty = [
+    {"all_files": [], "all_dirs": []},
+    "Found 0 files and 0 directories\n",
+]
+
+
+def test_show_preview_empty(call_empty, capsys):
+    show_preview(call_empty[0])
+    captured = capsys.readouterr()
+    assert captured.out == call_empty[1]
