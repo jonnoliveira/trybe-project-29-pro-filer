@@ -1,19 +1,30 @@
 from pro_filer.actions.main_actions import show_preview  # NOQA
+import pytest
+
 
 call = [
     {"all_files": ["file"], "all_dirs": []},
-    "Found 1 files and 0 directories\n",
-    "First 5 files: ['file']\n",
-    "First 5 directories: []\n",
+    "Found 1 files and 0 directories",
+    "First 5 files: ['file']",
+    "First 5 directories: []",
 ]
 
 
-def test_show_preview(capsys):
-    show_preview(call[0])  # <<<<<<<< passar o dicionário como argumento
+@pytest.mark.parametrize(
+    "context",
+    "line_one",
+    "line_two",
+    "line_three",
+    [
+        (call[0], call[1], call[2], call[3]),
+    ],
+)
+def test_show_preview(context, line_one, line_two, line_three, capsys):
+    show_preview(context)  # <<<<<<<< passar o dicionário como argumento
     captured = capsys.readouterr()
-    assert call[1] in captured.out
-    assert call[2] in captured.out
-    assert call[3] in captured.out
+    assert line_one in captured.out
+    assert line_two in captured.out
+    assert line_three in captured.out
 
 
 def test_show_preview_empty(capsys):
