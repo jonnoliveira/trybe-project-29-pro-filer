@@ -2,12 +2,12 @@ from pro_filer.actions.main_actions import show_preview  # NOQA
 import pytest
 
 
-call = [
-    {"all_files": ["file"], "all_dirs": []},
-    "Found 1 files and 0 directories",
-    "First 5 files: ['file']",
-    "First 5 directories: []",
-]
+# call = [
+#     {"all_files": ["file"], "all_dirs": []},
+#     "Found 1 files and 0 directories",
+#     "First 5 files: ['file']",
+#     "First 5 directories: []",
+# ]
 
 
 @pytest.mark.parametrize(
@@ -16,7 +16,12 @@ call = [
     "line_two",
     "line_three",
     [
-        (call[0], call[1], call[2], call[3]),
+        (
+            {"all_files": ["file"], "all_dirs": []},
+            "Found 1 files and 0 directories",
+            "First 5 files: ['file']",
+            "First 5 directories: []",
+        ),
     ],
 )
 def test_show_preview(context, line_one, line_two, line_three, capsys):
