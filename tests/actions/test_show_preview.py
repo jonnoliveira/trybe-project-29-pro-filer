@@ -11,22 +11,25 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "context",
-    "line_one",
-    "line_two",
-    "line_three",
+    "context, line_one, line_two, line_three",
     [
         (
-            {"all_files": ["file"], "all_dirs": []},
-            "Found 1 files and 0 directories",
-            "First 5 files: ['file']",
+            {
+                "all_files": ["file1", "file2"],
+                "all_dirs": [],
+            },
+            "Found 2 files and 0 directories",
+            "First 5 files: ['file1', 'file2']",
             "First 5 directories: []",
         ),
         (
-            {"all_files": [], "all_dirs": ["dir"]},
-            "Found 0 files and 1 directories",
+            {
+                "all_files": [],
+                "all_dirs": ["dir1", "dir2"],
+            },
+            "Found 0 files and 2 directories",
             "First 5 files: []",
-            "First 5 directories: ['dir']",
+            "First 5 directories: ['dir1', 'dir2']",
         ),
         (
             {
@@ -41,13 +44,13 @@ import pytest
                 "all_dirs": ["dir1", "dir2", "dir3", "dir4", "dir5", "dir6"],
             },
             "Found 6 files and 6 directories",
-            "First 5 files: ['file1','file2','file3','file4','file5']",
-            "First 5 directories: ['dir1','dir2','dir3','dir4','dir5']",
+            "First 5 files: ['file1', 'file2', 'file3', 'file4', 'file5']",
+            "First 5 directories: ['dir1', 'dir2', 'dir3', 'dir4', 'dir5']",
         ),
     ],
 )
-def test_show_preview(context, line_one, line_two, line_three, capsys):
-    show_preview(context)  # <<<<<<<< passar o dicionário como argumento
+def test_show_preview(capsys, context, line_one, line_two, line_three):
+    show_preview(context)
     captured = capsys.readouterr()
     assert line_one in captured.out
     assert line_two in captured.out
