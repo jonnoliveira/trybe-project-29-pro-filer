@@ -7,10 +7,10 @@ call_one = [
 ]
 
 call_two = [
-    {"all_files": ["file1"], "all_dirs": []},
+    {"all_files": ["file"], "all_dirs": []},
     "Found 1 files and 0 directories\n\
-First 5 files: ['file1']\n\
-First 5 directories: []\n",
+  First 5 files: ['file']\n\
+  First 5 directories: []\n",
 ]
 
 
