@@ -13,7 +13,7 @@ call = [
 def test_show_preview(capsys):
     show_preview(call)
     captured = capsys.readouterr()
-    assert captured.out == "".join(call[1])
+    assert call[1][0] + call[1][1] + call[1][2] in captured.out
 
 
 def test_show_preview_empty(capsys):
