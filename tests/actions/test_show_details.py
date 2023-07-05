@@ -13,7 +13,7 @@ import pytest
             "File name: Downloads\n",
             "File size in bytes: 2356\n",
             "File type: directory\n",
-            "File extension: [no\n",
+            "File extension: [no extension]\n",
             "Last modified date: 2023-06-13\n",
         ),
     ],
