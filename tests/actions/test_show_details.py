@@ -1,6 +1,11 @@
 from pro_filer.actions.main_actions import show_details  # NOQA
 from unittest.mock import Mock, patch
 import pytest
+import time
+import datetime
+
+date = "2023-06-13"
+ts = time.mktime(datetime.datetime.strptime(date, "%Y-%m-%d").timetuple())
 
 
 @pytest.mark.parametrize(
@@ -14,7 +19,7 @@ import pytest
             "File size in bytes: 2356\n",
             "File type: directory\n",
             "File extension: [no extension]\n",
-            "Last modified date: 2023-06-13\n",
+            f"Last modified date: {date}\n",
         ),
     ],
 )
@@ -22,11 +27,10 @@ def test_show_details_dir(
     context, line_one, line_two, line_three, line_four, line_five, capsys
 ):
     mock_exists = Mock(return_value=True)
-    mock_getsize = Mock(return_value=698)
+    mock_getsize = Mock(return_value=2356)
     mock_isdir = Mock(return_value=True)
     mock_splitext = Mock(return_value=("Downloads", ""))
-    mock_getmtime = Mock(return_value=1670000000)
-
+    mock_getmtime = Mock(return_value=ts)
     with (
         patch("os.path.exists", mock_exists),
         patch("os.path.getsize", mock_getsize),
@@ -52,10 +56,10 @@ def test_show_details_dir(
                 "base_path": "/home/trybe/Downloads/Trybe_logo.png",
             },
             "File name: Trybe_logo.png\n",
-            "File size in bytes: 65498\n",
+            "File size in bytes: 698\n",
             "File type: file\n",
             "File extension: .png\n",
-            "Last modified date: 2023-06-13\n",
+            f"Last modified date: {date}\n",
         ),
     ],
 )
@@ -63,10 +67,10 @@ def test_show_details_file(
     capsys, context, line_one, line_two, line_three, line_four, line_five
 ):
     mock_exists = Mock(return_value=True)
-    mock_getsize = Mock(return_value=65498)
+    mock_getsize = Mock(return_value=698)
     mock_isdir = Mock(return_value=False)
     mock_splitext = Mock(return_value=("Trybe_logo", ".png"))
-    mock_getmtime = Mock(return_value=1670000000)
+    mock_getmtime = Mock(return_value=ts)
 
     with (
         patch("os.path.exists", mock_exists),
